@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Get your position</title>
+<meta  charset="utf-8">
+</head>
+<script type="text/javascript">
+//通过浏览器的window.navigator对象的geolocation属性（对象）来获取浏览器的位置信息
+
+//成功获取位置信息时的回调函数，获取成功时getCurrentPosition()函数会返回position对象来描述位置信息，successHandler函数需要做的就是
+//处理position所包含的位置信息就可以了,position对象包含timestamp属性来表示获取位置时的时间，含有coords对象，coords对象包含精度、纬度等
+//位置信息
+var successHandler=function(position){
+
+	var geoMsg="用户所在的位置信息是:</br>";
+	geoMsg=geoMsg+"目前时间timestamp为:"+position.timestamp+"</br>";
+	var coords=position.coords;
+	//遍历coords对象
+	for(var prop in coords){
+		geoMsg=geoMsg+prop+":"+coords[prop]+"</br>";
+	
+	}
+	document.writeln(geoMsg);
+
+}
+
+
+//无法获取位置信息时的回调函数,error对象返回错误的代码
+var errorHandler=function(error){
+	var errMsg={
+		1:"用户拒绝了位置服务",
+		2:"无法获取位置信息",
+		3:"获取地理位置信息超时"	
+	}
+	//获取失败的返回状态码，这是一个number类型，用toString()方法转换为字符串
+	errCode=error.code;
+	alert("errorcode:"+errCode.toString()+"------"+errMsg[error.code]);
+
+
+}
+
+
+//获取浏览器信息,调用getCurrenPosition()函数,这个函数的两个参数要求传入获取成功时或者失败时的处理函数
+
+navigator.geolocation.getCurrentPosition(successHandler,errorHandler,{enableHighAccuracy:true,maxmumAge:10000});
+</script>
+
+</html>
