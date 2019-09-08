@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>跑马灯</title>
+</head>
+<body>
+
+<div id="pao">我爱你   </div>
+<script type="text/javascript">
+//每次将字符串的第0个字符，挪到最后一个即可实现跑动效果
+function f(s){
+	snew=s.substring(1)+s.substring(0,1);
+	return snew;	
+}
+
+function showpao(){
+d=document.getElementById("pao");
+s=d.innerHTML
+d.innerHTML=f(s);
+}
+//定时器定时执行
+window.setInterval("showpao()",500);
+
+</script>
+</body>
+</html>
